@@ -1,0 +1,15 @@
+<div class="container">
+  <!-- filters -->
+  <section class="filters">
+    <app-search-box></app-search-box>
+    <app-filter-list [items]="allCategories"></app-filter-list>
+    <app-filter-tags [items]="allTags"></app-filter-tags>
+  </section>
+  <section class="item-listing">
+    <app-sorting-filter [items]="allSortingFeatures"></app-sorting-filter>
+    <div class="item-listing__items item-listing--3items">
+      <app-medium-item *ngFor="let product of allproducts" [product]="product"></app-medium-item>
+    </div>
+    <app-paging></app-paging>
+  </section>
+</div>

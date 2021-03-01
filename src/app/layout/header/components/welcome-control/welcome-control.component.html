@@ -1,0 +1,25 @@
+<!-- middle header -->
+<div class="header__middle container">
+  <!-- logo -->
+  <a href="#" class="header__logo-box">
+    <img class="header__logo" src="img/logo.png" alt="">
+  </a>
+  <!-- user options -->
+  <div class="header__user-options">
+    <!-- login control -->
+    <a routerLink="/auth/login" *ngIf="!isAuthorized" class="link">Login</a>
+    <a *ngIf="isAuthorized" class="link">{{userName}}</a>
+
+
+    <div class="dropdown">
+      <div class="dropdown__header">
+        <div class="image image--small image--circle" style="background-image: url('./assets/img/user.png')">
+        </div>
+      </div>
+      <div class="dropdown__body">
+
+      </div>
+    </div>
+    <app-shopping-card></app-shopping-card>
+  </div>
+</div>

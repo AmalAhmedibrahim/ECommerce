@@ -1,0 +1,22 @@
+<div class="item-medium-1">
+  <div class="item-medium-1__alert">Sale</div>
+  <div class="item-medium-1__image image" style.backgroundImage="url('{{product.imageURL}}')">
+    <a href="#" class="item-medium-1__action">Add to Cart</a>
+  </div>
+  <a href="#">
+    <h4>{{product.name}}</h4>
+    <div class="flex-row">
+      <div>
+        <del>{{product.originalPrice| currency: 'USD' : 'symbol' : '1.0-0'}} </del>
+        <span class="lable">{{product.SalePrice | currency: 'USD' : 'symbol' : '1.0-0'}}</span>
+      </div>
+    </div>
+  </a>
+  <div class="crud-actions">
+    <a routerLink="/shoppingcart"> <i class="fas fa-cart-plus"></i></a>
+    <a routerLink="/products/productdetails/{{product._id}}"><i class="far fa-eye"></i></a>
+
+    <!-- <a href="#"><i class="fas fa-edit"></i></a> -->
+    <!-- <a href="#"><i class="fas fa-trash-alt"></i></a> -->
+  </div>
+</div>

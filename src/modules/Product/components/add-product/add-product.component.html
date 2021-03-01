@@ -1,0 +1,97 @@
+<!-- add Item -->
+<div class=" container">
+  <form #addProductForm="ngForm" class="add-product" novalidate>
+    <div class="add-product__images slider">
+      <div class="add-product__image-actions">
+        <div class="add-product__image-action">
+          <a href="#"><i class="fas fa-plus-square"></i></a>
+          <a href="#"><i class="fas fa-edit"></i></a>
+          <a href="#"><i class="fas fa-trash-alt"></i></a>
+        </div>
+      </div>
+      <div class="slider__items">
+        <div class="slider__item active" style="background-image: url(./assets/img/products/product-grey-7.jpg)"></div>
+        <div class="slider__item" style="background-image: url(./assets/img/products/product-grey-7.jpg)"></div>
+        <div class="slider__item" style="background-image: url(./assets/img/products/product-grey-7.jpg)"></div>
+      </div>
+      <div class="slider__indicators">
+        <span class="slider__indicator active"></span>
+        <span class="slider__indicator"></span>
+        <span class="slider__indicator"></span>
+      </div>
+    </div>
+    <div class="add-product__data">
+      <div class="form-controls">
+        <div class="form-group" [ngClass]="{'invalid': productName.errors && (productName.dirty || submit)}">
+          <label for="">Name</label>
+          <input #productName="ngModel" required [(ngModel)]="product.name" class="form-control" type="text" name="name"
+            id="name">
+        </div>
+        <div class="form-group" [ngClass]="{'invalid': description.errors && (description.dirty || submit)}">
+          <label for="">Description</label>
+          <textarea #description="ngModel" required [(ngModel)]="product.description" class="form-control"
+            name="description" id="" cols="30" rows="4"></textarea>
+        </div>
+        <div class="form-group" [ngClass]="{'invalid': price.errors && (price.dirty || submit)}">
+          <label for="">Price</label>
+          <input #price="ngModel" required [(ngModel)]="product.originalPrice" class="form-control" type="text"
+            name="price" id="" [ngClass]="{'invalid': price.errors && price.dirty}">
+        </div>
+        <div class="add-product__discount">
+          <div class="form-group">
+            <label for="">Satus</label>
+            <div class="form-group__radios">
+              <div class="form-group__radio"><input type="radio" name="satus" id="" [checked]="product.onSale"
+                  (change)="product.onSale=true"><span>On Sale</span></div>
+              <div class="form-group__radio"><input type="radio" name="satus" id="" [checked]="!product.onSale"
+                  (change)="product.onSale=false"><span>Not On Sale</span></div>
+            </div>
+          </div>
+          <div class="form-group" [ngClass]="{'invalid': salePrice.errors && (salePrice.dirty || submit)}">
+            <label for="">Price after sale </label>
+            <input #salePrice="ngModel" [disabled]="!product.onSale" required [(ngModel)]="product.SalePrice"
+              class="form-control" type="text" name="salePrice" id="salePrice" [required]="product.onSale">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="">Payment Types</label>
+          <div class="form-group__checkboxs">
+            <div class="form-group__checkbox" *ngFor="let type of paymentTypes; let i = index"><input type="checkbox"
+                name="type{{i}}" id="type{{i}}" [value]="type.value"
+                [checked]="product.paymentTypes.includes(type.value)"
+                (change)="onPaymentTypesChange($event)"><span>{{type.name}}</span></div>
+
+          </div>
+        </div>
+        <div class="form-group" [ngClass]="{'invalid': category.errors && (category.dirty || submit)}">
+          <label for="">Category</label>
+          <select class="form-control" name="category" id="category" #category="ngModel" [(ngModel)]="product.category"
+            required #category="ngModel">
+            <option *ngFor="let category of categories;let i = index" [value]="category.value">{{category?.name}}
+            </option>
+
+          </select>
+        </div>
+
+        <div class="taged-textbox form-group" [ngClass]="{'invalid': product.tags.length==0 && submit}">
+          <label class="taged-textbox__lable" for="">Tags</label>
+          <div class="taged-textbox__data">
+            <div class="taged-textbox__tags">
+              <div class="taged-textbox__tag" *ngFor="let tag of product.tags;let i = index"><span>{{tag}}</span><a
+                  (click)="onTagRemoved(i)" class="taged-textbox__remove"><i class="fas fa-times"></i></a></div>
+            </div>
+            <div class="taged-textbox__clear">
+              <a (click)="onClearTag()"><i class="fas fa-times"></i></a>
+            </div>
+          </div>
+          <input class="taged-textbox__textbox form-control" type="text" name="tag" id="tag" #tagtxt
+            (keyup.enter)="onTagAdded(tagtxt)">
+        </div>
+        <div class="add-product__actions">
+          <button href="#" class="btn btn--gray">Cancel</button>
+          <button (click)="onSubmit()" class="btn btn--primary">Add</button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

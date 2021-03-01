@@ -1,0 +1,8 @@
+.dropdown--left{
+  &:hover{
+    .dropdown__body{
+      display: block;
+    }
+  }
+}
+
